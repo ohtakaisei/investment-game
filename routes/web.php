@@ -27,3 +27,7 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::resource("users", "UserController", ["only" => ["show"]]);
     // Route::post("users", "UsersController@give");
 });
+// 株価情報
+Route::get("https://api.matumo.com/kabu/kabu_ave_realtime_api_v1.php?type=1", "StockController@show");
+
+Route::get('/', 'MicropostsController@index');
