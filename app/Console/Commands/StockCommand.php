@@ -13,7 +13,7 @@ class StockCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:getnikkei';
+    protected $signature = 'getnikkei';
 
     /**
      * The console command description.

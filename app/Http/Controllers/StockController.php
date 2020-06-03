@@ -10,9 +10,9 @@ class StockController extends Controller
 {
     public function index()
     {
-        $stock = Stock::lastInsertId();
-
-        return view('stock.index', [
+        $stock = Stock::orderBy('created_at', 'desc')->first();
+        
+        return view('stocks.index', [
             'stock' => $stock,
         ]);
     }

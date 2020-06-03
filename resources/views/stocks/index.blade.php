@@ -1,5 +1,5 @@
-@extends('layouts.app')
+@extends('layout.app')
 
 @section('content')
-    @include('stock.stock', ['stock' => $stock])
+    @include('stocks.stock', ['stock' => $stock])
 @endsection
