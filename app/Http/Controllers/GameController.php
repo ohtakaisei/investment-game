@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Bet;
+
 class GameController extends Controller
 {
     /**
@@ -11,10 +13,7 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -23,7 +22,11 @@ class GameController extends Controller
      */
     public function create()
     {
-        //
+        $bet = new Bet;
+        
+        return view('stock.create', [
+            'bet' => $bet,
+            ]);
     }
 
     /**
@@ -34,51 +37,14 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bet = new Bet;
+        $bet->bets_point = $request->bets_point;
+        $bet->direction = $request->direction;
+        $bet->save();
+        
+        return view("stocks.stock", [
+            "answer" => "Betを完了しました！",
+            ]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

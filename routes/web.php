@@ -22,16 +22,11 @@ Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
 Route::get("login", "Auth\LoginController@showLoginForm")->name("login");
 Route::post("login", "Auth\LoginController@login")->name("login.post");
 Route::get("logout", "Auth\LoginController@logout")->name("logout.get");
-//ユーザー表示
-Route::group(["middleware" => ["auth"]], function () {
+
+
+Route::group(['middleware' => ['auth']], function () {
     Route::resource("users", "UserController", ["only" => ["show"]]);
-    // Route::post("users", "UsersController@give");
-});
-// 株価表示
-Route::group(['middleware' => ['auth']], function () {
+    Route::resource("users", "UserController", ["only" => ["show"]]);
     Route::resource('stocks', 'StockController', ['only' => ['index']]);
-});
-// ゲーム
-Route::group(['middleware' => ['auth']], function () {
-    Route::resource('stocks', 'GameController', ['only' => ['create', 'store', 'show']]);
+    Route::resource('stocks', 'GameController', ['only' => ['create', 'store']]);
 });
