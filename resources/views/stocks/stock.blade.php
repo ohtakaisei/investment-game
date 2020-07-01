@@ -7,4 +7,22 @@
 
 {!! link_to_route('stocks.create', 'Betしに行く！', [], ['class' => 'btn btn-primary']) !!}
 
-<h3>結果</h3>
+<h1>{{ Auth::user()->name }}のBet履歴</h1>
+<table class="table">
+  <thead class="thead-dark">
+      
+    <tr>
+      <th scope="col">日付・時間</th>
+      <th scope="col">投資額</th>
+    </tr>
+  </thead>
+  <tbody>
+          @foreach ($bets as $bet)
+    <tr>
+      <th scope="row">{!! $bet->created_at !!}</th>
+      <td>{!! $bet->bets_point !!}円</td>
+    </tr>
+        @endforeach
+  </tbody>
+</table>
+{{ $bets->links('pagination::bootstrap-4') }}

@@ -81,7 +81,7 @@ class JudgeCommand extends Command
                $user = User::where("id", $bet->user_id)->first();
                $ra = mt_rand(10, 1000);
                
-               $user->point += $ra;
+               $user->point -= $ra;
                $user->save();
                $result = "株価が変わりませんでした".$ra."円の損失です。";
            }else {

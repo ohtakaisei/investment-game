@@ -18,7 +18,22 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+    // public function index()
+    // {
+    //     $data = [];
+    //     if (\Auth::check()) {
+    //         $user = \Auth::user();
+    //         $bets = $user->bets()->orderBy('created_at', 'desc')->paginate(10);
+            
+    //         $data = [
+    //             'user' => $user,
+    //             'bets' => $bets,
+    //         ];
+    //     }
+        
+    //     return view('stocks.index', $data);
+    // }
+
 
     /**
      * Show the form for creating a new resource.
