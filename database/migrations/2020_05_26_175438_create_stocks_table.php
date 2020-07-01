@@ -16,6 +16,7 @@ class CreateStocksTable extends Migration
         Schema::create('stocks', function (Blueprint $table) {
             $table->increments('id');
             $table->float('price', 7, 2);
+            $table->boolean('is_finished');
             $table->timestamps();
         });
     }
@@ -28,5 +29,6 @@ class CreateStocksTable extends Migration
     public function down()
     {
         Schema::dropIfExists('stocks');
+        $table->dropColumn('is_finished');
     }
 }

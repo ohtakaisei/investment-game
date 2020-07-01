@@ -14,7 +14,9 @@ class AddStockIdToBetsTable extends Migration
     public function up()
     {
         Schema::table('bets', function (Blueprint $table) {
-        $table->integer('stock_id');
+        $table->integer('stock_id')->unsigned()->index();
+        // 外部キー制約
+            $table->foreign('stock_id')->references('id')->on('stocks');
         });
     }
 

@@ -10,7 +10,7 @@
 
 <div class="row">
     <div class="col-6">
-        {!! Form::model($bets, ['route' => 'bets.store']) !!}
+        {!! Form::model($bet, ['action' => 'GameController@store']) !!}
         
         <div class="form-group">
             {!! Form::label('bets_point', 'かけるpoint数:') !!}
@@ -28,7 +28,7 @@
             ) !!}
             
             {!! Form::label('direction', 'up&down:') !!}
-             {!! Form::select('bets_point', [
+             {!! Form::select('direction', [
             'up' => 'up！',
             'down' => 'down！']
             ) !!}
@@ -37,3 +37,5 @@
         </div>
     </div>
 </div>
+
+@endsection

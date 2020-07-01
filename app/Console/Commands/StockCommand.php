@@ -43,6 +43,7 @@ class StockCommand extends Command
         $row_array = explode(",", $stockapi);
         $stock = new Stock;
         $stock->price = $row_array[4];
+        $stock->is_finished = 0;
         $stock->save();
         }
 }

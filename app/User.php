@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     
-    public function bet()
+    public function bets()
     {
         return $this->hasMany(Bet::class);
     }

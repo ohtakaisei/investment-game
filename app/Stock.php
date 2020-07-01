@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Bet;
+
 class Stock extends Model
 {
     protected $guarded = [

@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Bet;
 
+use App\Stock;
+
+use Illuminate\Support\Facades\Auth;
+
+
 class GameController extends Controller
 {
     /**
@@ -24,7 +29,7 @@ class GameController extends Controller
     {
         $bet = new Bet;
         
-        return view('stock.create', [
+        return view('stocks.create', [
             'bet' => $bet,
             ]);
     }
@@ -38,13 +43,19 @@ class GameController extends Controller
     public function store(Request $request)
     {
         $bet = new Bet;
+        $stock = Stock::orderBy('created_at', 'desc')->first();
         $bet->bets_point = $request->bets_point;
         $bet->direction = $request->direction;
+        $bet->user_id = Auth::user()->id;
+        $bet->stock_id = $stock->id;
         $bet->save();
         
-        return view("stocks.stock", [
-            "answer" => "Betを完了しました！",
+       return view("stocks.complete", [
+            "bet" => $bet,
             ]);
     }
+    
+   
+    
     
 }

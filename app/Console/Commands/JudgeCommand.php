@@ -8,6 +8,10 @@ use App\Bet;
 
 use App\Stock;
 
+use App\User;
+
+use Carbon\Carbon;
+
 class JudgeCommand extends Command
 {
     /**
@@ -41,31 +45,52 @@ class JudgeCommand extends Command
      */
     public function handle()
     {
-//         $judges = Bet::find($user_id); //判定するBetを決める
-
-// $user = User::find($user_id); //判定するユーザー
-
-// 　$old_stocks = Stock::　//現在ジャッジしているBetの時の株価を入れる
-
-// $new_stocks = Stock::orderBy('created_at', 'desc')->first('price');　　　　//現在の株価
-
-// $old_time = $judges->created_at;　　　//Betの作成日
-
-// $direction = $judges->direction; //ベットの方向
-
-// $point = $judges->point; //ベットのポイント
-
-// $new_time = Stock::orderBy('created_at', 'desc')->first('created_at');　//現在の時間
-
-// ＊2　if ($old_timeの30分後 = $new_time) {
-//     if ($direction == up && $new_stocks > $old_stocks) {
-//         $answer = "あなたの回答は正解です！";                            //正解コール格納
-//         $user->update(['point' => $point + $user->point]);
         
-//         return view('stocks.stock', [
-//              'answer' => $answer,
-//             ])
-//     }
-//     }
+        
+        $now_stock = Stock::latest()->first();
+        $stock = Stock::whereBetween('created_at', [Carbon::now()->subMinute(1)->format('Y-m-d H:i:s'),Carbon::now()->subMinute(0)->format('Y-m-d H:i:s')])->where('is_finished',false)->first();
+        $result = "";
+        
+        foreach($stock->bets as $bet) {
+ // now_stockとbetの賭けを比較して判定
+           if ($stock->price > $now_stock->price && $bet->direction == "down") {
+               $user = User::where("id", $bet->user_id)->first();
+               $user->point += $bet->bets_point;
+               $user->save();
+               $result = "お見事！当たりましたので".$bet->bets_point."ポイント追加されます";
+               
+           }elseif ($stock->price > $now_stock->price && $bet->direction == "up") {
+               $user = User::where("id", $bet->user_id)->first();
+               $user->point -= $bet->bets_point;
+               $user->save();
+               $result = "残念！外れましたので".$bet->bets_point."ポイント失われました";
+                
+           }elseif ($stock->price < $now_stock->price && $bet->direction == "up") {
+               $user = User::where("id", $bet->user_id)->first();
+               $user->point += $bet->bets_point;
+               $user->save();
+               $result = "お見事！当たりましたので".$bet->bets_point."ポイント追加されます";
+                
+           }elseif ($stock->price < $now_stock->price && $bet->direction == "down") {
+               $user = User::where("id", $bet->user_id)->first();
+               $user->point -= $bet->bets_point;
+               $user->save();
+               $result = "残念！外れましたので".$bet->bets_point."ポイント失われました";
+                
+           }elseif ($stock->price == $now_stock->price) {
+               $user = User::where("id", $bet->user_id)->first();
+               $ra = mt_rand(10, 1000);
+               
+               $user->point += $ra;
+               $user->save();
+               $result = "株価が変わりませんでした".$ra."円の損失です。";
+           }else {
+               $result = "失敗";
+           }
+           $stock->is_finished = true;
+    $stock->save();
+    echo $result;
+    }
+    
 }
 }

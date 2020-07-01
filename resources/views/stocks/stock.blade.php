@@ -8,4 +8,3 @@
 {!! link_to_route('stocks.create', 'Betしに行く！', [], ['class' => 'btn btn-primary']) !!}
 
 <h3>結果</h3>
-{{ $answer }}
