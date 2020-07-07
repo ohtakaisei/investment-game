@@ -14,6 +14,8 @@
     <tr>
       <th scope="col">日付・時間</th>
       <th scope="col">投資額</th>
+      <th >判定結果</th>
+      <th >履歴削除</th>
     </tr>
   </thead>
   <tbody>
@@ -21,6 +23,10 @@
     <tr>
       <th scope="row">{!! $bet->created_at !!}</th>
       <td>{!! $bet->bets_point !!}円</td>
+      <td>{!! $bet->result !!}</td>
+      <td>{!! Form::model($bet, ['route' => ['stocks.destroy', $bet->id], 'method' => 'delete']) !!}
+        {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
+    {!! Form::close() !!}</td>
     </tr>
         @endforeach
   </tbody>

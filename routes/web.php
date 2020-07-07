@@ -27,6 +27,6 @@ Route::get("logout", "Auth\LoginController@logout")->name("logout.get");
 Route::group(['middleware' => ['auth']], function () {
     Route::resource("users", "UserController", ["only" => ["show"]]);
     Route::resource("users", "UserController", ["only" => ["show"]]);
-    Route::resource('stocks', 'StockController', ['only' => ['index']]);
+    Route::resource('stocks', 'StockController', ['only' => ['index', 'destroy']]);
     Route::resource('stocks', 'GameController', ['only' => ['create', 'store']]);
 });

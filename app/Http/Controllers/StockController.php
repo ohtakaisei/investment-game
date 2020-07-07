@@ -28,4 +28,12 @@ class StockController extends Controller
         ]);
         }
     }
+    
+    public function destroy($id)
+    {
+        $bet = Bet::find($id);
+        $bet->delete();
+
+        return redirect('/stocks');
+    }
 }
