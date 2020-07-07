@@ -13,25 +13,15 @@
         {!! Form::model($bet, ['action' => 'GameController@store']) !!}
         
         <div class="form-group">
-            {!! Form::label('bets_point', 'かけるpoint数:') !!}
-            {!! Form::select('bets_point', [
-            '100' => '100points',
-            '500' => '500points',
-            '700' => '700points',
-            '1000' => '1000points',
-            '2000' => '2000points',
-            '3000' => '3000points',
-            '4000' => '4000points',
-            '5000' => '5000points',
-            '6000' => '6000points',
-            '10000' => '10000points']
-            ) !!}
+            {!! Form::label('bets_point', 'かける金額') !!}
+            {!! Form::number('bets_point', null, ['class' => 'form-control', 'placeholder' => '例：1', 'min' => 1, 'max' => 10000]) !!}
             
-            {!! Form::label('direction', 'up&down:') !!}
+            
+            {!! Form::label('direction', 'UP&DOWN') !!}<br>
              {!! Form::select('direction', [
             'up' => 'up！',
             'down' => 'down！']
-            ) !!}
+            ) !!}<br>
             
             {!! Form::submit('BETS!') !!}
         </div>
