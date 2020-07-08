@@ -47,10 +47,8 @@ class JudgeCommand extends Command
     {
         
         $now_stock = Stock::latest()->first();
-        $stock = Stock::whereBetween('created_at', [Carbon::now()->subMinute(1)->format('Y-m-d H:i:s'),Carbon::now()->subMinute(0)->format('Y-m-d H:i:s')])->where('is_finished',false)->first();
-        $result = "";
+        $stock = Stock::whereBetween('created_at', [Carbon::now()->subMinute(31)->format('Y-m-d H:i:s'),Carbon::now()->subMinute(30)->format('Y-m-d H:i:s')])->where('is_finished',false)->first();
         foreach($stock->bets as $bet) {
-            echo $bet.PHP_EOL;
  // now_stockとbetの賭けを比較して判定
            if ($stock->price > $now_stock->price && $bet->direction == "down") {
                $user = User::where("id", $bet->user_id)->first();
@@ -58,7 +56,6 @@ class JudgeCommand extends Command
                $user->save();
                $bet->result = "+". $bet->bets_point. "円";
                $bet->save();
-               $result = "お見事！当たりましたので".$bet->bets_point."ポイント追加されます";
                
            }elseif ($stock->price > $now_stock->price && $bet->direction == "up") {
                $user = User::where("id", $bet->user_id)->first();
@@ -66,7 +63,6 @@ class JudgeCommand extends Command
                $user->save();
                $bet->result = "-". $bet->bets_point. "円";
                $bet->save();
-               $result = "残念！外れましたので".$bet->bets_point."ポイント失われました";
                 
            }elseif ($stock->price < $now_stock->price && $bet->direction == "up") {
                $user = User::where("id", $bet->user_id)->first();
@@ -74,7 +70,6 @@ class JudgeCommand extends Command
                $user->save();
                $bet->result = "+". $bet->bets_point. "円";
                $bet->save();
-               $result = "お見事！当たりましたので".$bet->bets_point."ポイント追加されます";
                 
            }elseif ($stock->price < $now_stock->price && $bet->direction == "down") {
                $user = User::where("id", $bet->user_id)->first();
@@ -82,17 +77,13 @@ class JudgeCommand extends Command
                $user->save();
                $bet->result = "-". $bet->bets_point. "円";
                $bet->save();
-               $result = "残念！外れましたので".$bet->bets_point."ポイント失われました";
                 
            }elseif ($stock->price == $now_stock->price) {
                $bet->result = "変動なし";
                $bet->save();
-               echo "同点";
-               
            }
           
     }
-    echo "終わり";
     $stock->is_finished = true;
     $stock->save();
     
