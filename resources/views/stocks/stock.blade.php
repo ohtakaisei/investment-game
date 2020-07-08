@@ -23,7 +23,7 @@
     <tr>
       <th scope="row">{!! $bet->created_at !!}</th>
       <td>{!! $bet->bets_point !!}円</td>
-      <td>{!! $bet->result !!}</td>
+      <td><strong>{!! $bet->result !!}</strong></td>
       <td>{!! Form::model($bet, ['route' => ['stocks.destroy', $bet->id], 'method' => 'delete']) !!}
         {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}</td>
