@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-
+<div class="container">
     <h1>株価予想UP＆DOWN</h1>
 
 
@@ -27,5 +27,5 @@
         </div>
     </div>
 </div>
-
+</div>
 @endsection

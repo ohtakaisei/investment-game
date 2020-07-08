@@ -1,8 +1,10 @@
 @extends("layout.app")
 
 @section("content")
-    <div class="text-center">
-        <h1>Sign up</h1>
+<div class="container">
+    <div class="text-center welcome">
+        <h1>会員登録</h1>
+        <hr>
     </div>
     
     <div class="row">
@@ -32,5 +34,6 @@
             {!! Form::submit("登録！", ["class" => "btn btn-primary btn-block"]) !!}
         {!! Form::close() !!}
         </div>
+    </div>
     </div>
     @endsection

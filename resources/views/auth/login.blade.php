@@ -1,8 +1,10 @@
 @extends('layout.app')
 
 @section('content')
-  <div class="text-center">
+<div class="container">
+  <div class="text-center welcome">
       <h1>ログイン</h1>
+      <hr>
   </div>
   
   <div class="row">
@@ -24,5 +26,6 @@
             
             <p class="mt-2">新しいユーザーですか？ {!! link_to_route('signup.get', '新規登録する！') !!}</p>
       </div>
+  </div>
   </div>
   @endsection
