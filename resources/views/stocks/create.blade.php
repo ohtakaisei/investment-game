@@ -28,4 +28,11 @@
     </div>
 </div>
 </div>
+
+<div class="container">
+    <h1>この画面の説明</h1>
+    <p>好きな金額を入れてから、方向を決めてみよう！</p>
+    <p>「<storng>かける金額</storng>」のところに金額を書く。「<storng>UP&DOWN</storng>」のところに方向を書こう！</p>
+    <p>指定が終わったら、「bet」のボタンを押そう！</p>
+</div>
 @endsection
